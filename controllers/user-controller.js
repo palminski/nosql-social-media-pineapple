@@ -5,6 +5,10 @@ const userController = {
     //----GET
     getAllUsers(req,res) {
         User.find({})
+        .populate({
+            path: 'friends',
+            select: "-__v -friends -thoughts"
+        })
         .select('-__v')
         .then(response => res.json(response))
         .catch(err => {
@@ -15,6 +19,10 @@ const userController = {
 
     getUserById({params},res) {
         User.findOne({_id: params.id})
+        .populate({
+            path: 'friends',
+            select: "-__v -friends -thoughts"
+        })
         .select('-__v')
         .then(response => {
             if (!response) {
