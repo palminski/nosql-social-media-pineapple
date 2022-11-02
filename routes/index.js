@@ -6,7 +6,7 @@ router.use('/api',apiRoutes);
 
 //Default if adress not found
 router.use((req,res) => {
-    res.status(404).send('<h1> 404 Not Found </h1>');
+    res.status(404).send('<h1> Server is On </h1><h2> Make requests using /api</h2>');
 });
 
 module.exports = router;
