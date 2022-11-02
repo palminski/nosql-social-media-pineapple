@@ -1,7 +1,7 @@
 const {User} = require('../models');
 
 const userController = {
-
+    //-----For Users
     //----GET
     getAllUsers(req,res) {
         User.find({})
@@ -62,6 +62,40 @@ const userController = {
                 return;
             }
             res.json(response)
+        })
+        .catch(err => res.status(400).json(err));
+    },
+
+    //-----For Friends
+    //-----POST
+    addFriend({params},res) {
+        User.findOneAndUpdate(
+            {_id: params.userId},
+            {$push: {friends: params.friendId}},
+            {new: true, runValidators:true}
+        )
+        .then(response => {
+            if (!response) {
+                res.status(404).json({message: "Not Found"});
+                return;
+            }
+            res.json(response);
+        })
+        .catch(err => res.status(400).json(err));
+    },
+    //-----DELETE
+    removeFriend({params},res) {
+        User.findOneAndUpdate(
+            {_id: params.userId},
+            {$pull: {friends: params.friendId}},
+            {new: true, runValidators:true}
+        )
+        .then(response => {
+            if (!response) {
+                res.status(404).json({message: "Not Found"});
+                return;
+            }
+            res.json(response);
         })
         .catch(err => res.status(400).json(err));
     }
