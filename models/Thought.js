@@ -8,7 +8,6 @@ const ReactionSchema = new Schema (
         },
         reactionBody: {
             type:String,
-            unique:true,
             maxLength: 280,
             trim: true
         },
@@ -35,7 +34,6 @@ const ThoughtSchema = new Schema (
     {
         thoughtText: {
             type:String,
-            unique:true,
             maxLength: 280,
             trim: true
         },

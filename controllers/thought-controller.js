@@ -14,11 +14,12 @@ const thoughtController = {
 
     //-----POST
     createThought({params, body}, res) {
+        console.log(params);
         Thought.create(body)
         .then(({_id}) => {
             return User.findOneAndUpdate(
                 {_id: params.userId},
-                {$push: {comments:'_id'}},
+                {$push: {comments:_id}},
                 {new:true}
             );
         })
@@ -29,10 +30,7 @@ const thoughtController = {
             }
             res.json(response);
         })
-        .catch(err => {
-            console.log('Error');
-            res.status(400).json(err);
-        });
+        .catch(err => res.json(err));
     }
 
     //-----PUT
