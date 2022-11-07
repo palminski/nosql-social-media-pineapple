@@ -1,4 +1,4 @@
-const {User} = require('../models');
+const {User, Thought} = require('../models');
 
 const userController = {
     //-----For Users
@@ -64,6 +64,12 @@ const userController = {
     //-----DELETE
     deleteUser({params}, res) {
         User.findOneAndDelete({_id: params.id})
+        .then(response => {
+            if (!response) {
+                return res.status(404).json({message: "Not Found"});
+            }
+            return Thought.deleteMany({username: {$eq: response.username}})
+        })
         .then(response => {
             if (!response) {
                 res.status(404).json({message: "Not Found"});

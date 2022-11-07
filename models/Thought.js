@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 const ReactionSchema = new Schema (
     {
@@ -8,6 +8,7 @@ const ReactionSchema = new Schema (
         },
         reactionBody: {
             type:String,
+            required:true,
             maxLength: 280,
             trim: true
         },
@@ -23,10 +24,9 @@ const ReactionSchema = new Schema (
     },
     {
         toJSON: {
-            virtuals: true,
             getters: true
         },
-        id:false
+
     }
 );
 
@@ -46,9 +46,7 @@ const ThoughtSchema = new Schema (
             type:String,
             required: 'You must include username in request'
         },
-        reactions:[
-            ReactionSchema
-        ],
+        // reactions:[ReactionSchema]
     },
     {
         toJSON: {
@@ -58,6 +56,10 @@ const ThoughtSchema = new Schema (
         id:false
     }
 );
+
+// ThoughtSchema.virtual('reactionCount').get(function() {
+//     return this.reactions.length;
+// });
 
 const Thought = model ('Thought', ThoughtSchema);
 module.exports = Thought;
