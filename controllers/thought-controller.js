@@ -96,8 +96,32 @@ const thoughtController = {
 
     //-----For Reactions
     //-----POST
-
+    addReaction({params, body},res) {
+        Thought.findOneAndUpdate(
+            {_id: params.thoughtId},
+            {$push: {reactions: body}},
+            {new: true, runValidators:true}
+        )
+        .then(response => {
+            if (!response) {
+                res.status(404).json({message: "Not Found"});
+                return;
+            }
+            res.json(response)
+        })
+        .catch(err => res.status(400).json(err));
+    },
+    
     //-----DELETE
+    removeReaction({params},res) {
+        Thought.findOneAndUpdate(
+            {_id: params.thoughtId},
+            {$pull: {reactions: {reactionId: params.reactionId}}},
+            {new: true}
+        )
+        .then(response => res.json(response))
+        .catch(err => res.status(400).json(err));
+    }
 
 };
 
