@@ -3,6 +3,8 @@
 ## Description
 A simple server that modifies and retrieves data from a nosql database based on API calls
 
+A video demonstrating the usage of this project can be viewed [here](https://drive.google.com/file/d/1GcXSgSVFf_9e3dTcjRGtB3DxUHvvQk8D/view)
+
 ## Table of Contents
 [Installation](#installation)
 [Usage](#usage)
