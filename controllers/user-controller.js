@@ -5,10 +5,10 @@ const userController = {
     //----GET
     getAllUsers(req,res) {
         User.find({})
-        .populate({
-            path: 'friends',
-            select: "-__v -friends -thoughts"
-        })
+        // .populate({
+        //     path: 'friends',
+        //     select: "-__v -friends -thoughts"
+        // })
         .select('-__v')
         .then(response => res.json(response))
         .catch(err => {
@@ -114,5 +114,6 @@ const userController = {
         .catch(err => res.status(400).json(err));
     }
 };
+
 
 module.exports = userController

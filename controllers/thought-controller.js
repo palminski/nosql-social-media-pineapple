@@ -6,6 +6,7 @@ const thoughtController = {
     //----GET
     getAllThoughts(req,res) {
         Thought.find({})
+        .select('-__v')
         .then(response => res.json(response))
         .catch(err => {
             console.log('Error');
@@ -111,7 +112,7 @@ const thoughtController = {
         })
         .catch(err => res.status(400).json(err));
     },
-    
+
     //-----DELETE
     removeReaction({params},res) {
         Thought.findOneAndUpdate(

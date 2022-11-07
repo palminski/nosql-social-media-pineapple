@@ -15,7 +15,12 @@ const ReactionSchema = new Schema (
         createdAt: {
             type: Date,
             default: Date.now,
-            //get: this will format it <>
+            get: createdAtVal => {
+                let month = createdAtVal.getMonth() + 1;
+                let day = createdAtVal.getDate();
+                let year = createdAtVal.getFullYear();
+                return `${month}/${day}/${year}`;
+            }
         },
         username: {
             type:String,
@@ -40,7 +45,12 @@ const ThoughtSchema = new Schema (
         createdAt: {
             type: Date,
             default: Date.now,
-            //get: this will format it <>
+            get: createdAtVal => {
+                let month = createdAtVal.getMonth() + 1;
+                let day = createdAtVal.getDate();
+                let year = createdAtVal.getFullYear();
+                return `${month}/${day}/${year}`;
+            }
         },
         username: {
             type:String,
